@@ -1,0 +1,15 @@
+{"level":"info","message":"Hello I am from logger"}
+{"level":"info","message":"Hello I am from logger"}
+{"level":"info","message":"Hello I am from logger"}
+{"level":"info","message":"Hello I am from logger"}
+{"level":"info","message":"\u001b[0mGET /auth/login \u001b[36m304\u001b[0m 4.826 ms - -\u001b[0m\n"}
+{"level":"info","message":"Hello I am from logger"}
+{"level":"info","message":"\u001b[0mGET /auth/login \u001b[36m304\u001b[0m 0.516 ms - -\u001b[0m\n"}
+{"level":"info","message":"Hello I am from logger"}
+{"level":"info","message":"combine\n"}
+{"level":"info","message":"Hello I am from logger"}
+{"level":"info","message":"combine\n"}
+{"level":"info","message":"Hello I am from logger"}
+{"level":"info","message":"::1 - - [22/Jan/2022:14:43:17 +0000] \"GET /auth/login HTTP/1.1\" 304 - \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36\"\n"}
+{"level":"info","message":"Hello I am from logger"}
+{"level":"info","message":"::1 - - [22/Jan/2022:14:43:20 +0000] \"GET /auth/login HTTP/1.1\" 304 - \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36\"\n"}
