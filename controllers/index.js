@@ -1,6 +1,7 @@
 const {getLogin } = require('./auth/login');
-const {getMovies} = require('./movieController');
+const {getMovies,getMovie} = require('./movieController');
 module.exports = {
     getLogin,
-    getMovies
+    getMovies,
+    getMovie
 }
