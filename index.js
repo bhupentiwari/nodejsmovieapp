@@ -3,7 +3,7 @@ const app = require('./app');
 
 const server = http.createServer(app);
 
-server.listen('50000',()=>{
+server.listen('8080',()=>{
     console.log('server is listening');
 })
 
