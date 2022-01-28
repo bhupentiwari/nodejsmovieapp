@@ -1,10 +1,13 @@
 const { dbCon } = require('../configuration');
 const { ObjectId } = require('bson');
+const createError = require('http-errors');
 
 const getMovies = (req, res, next) => {
     const pageNum = parseInt(req.params.page);
     if (isNaN(pageNum)) {
-        return res.status(400).send('bad request');
+        //return res.status(400).send('bad request');
+        return next(createError(400));
+
     }
     const moviesToSkip = (pageNum - 1) * 10;
     try {
@@ -14,25 +17,29 @@ const getMovies = (req, res, next) => {
 
         })
     } catch (error) {
-        return res.status(500).send('Internal server error');
+        return next(createError(500));
+        //return res.status(500).send('Internal server error');
     }
 
 }
 const getMovie = (req, res, next) => {
     if (!ObjectId.isValid(req.params.id)) {
-        return res.status(400).send('movie id not valid');
+        return next(createError(400));
+        //return res.status(400).send('movie id not valid');
     }
     const _id = new ObjectId(req.params.id);
     try {
         dbCon('movies', async (db) => {
             const movie = await db.findOne({ "_id": _id });
             if (!movie) {
-                return res.status(400).send('movie not found');
+                return next(createError(400));
+                //return res.status(400).send('movie not found');
             }
             res.json(movie);
         })
     } catch (error) {
-        return res.status(500).send('Internal server error');
+        return next(createError(500));
+        //return res.status(500).send('Internal server error');
     }
 
 }
