@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const {getLogin} = require('../controllers');
+const {getLogin,postSignup} = require('../controllers');
 const router = Router();
 
 router
@@ -7,11 +7,7 @@ router
     .post('/login',(req,res,next)=>{
 
     })
-    .get('/signup',(req,res,next)=>{
-
-    })
-    .post('/signup',(req,res,next)=>{
-
-    })
+    .get('/signup',postSignup)
+    .post('/signup',postSignup)
 
 module.exports = router;

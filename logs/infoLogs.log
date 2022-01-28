@@ -102,3 +102,8 @@
 {"level":"info","message":"::1 - - [26/Jan/2022:06:17:29 +0000] \"GET /movies/1 HTTP/1.1\" 200 1767 \"-\" \"PostmanRuntime/7.18.0\"\n"}
 {"level":"info","message":"::1 - - [26/Jan/2022:06:17:39 +0000] \"GET /movie/573a1390f29313caabcd5c0f HTTP/1.1\" 200 1765 \"-\" \"PostmanRuntime/7.18.0\"\n"}
 {"level":"info","message":"::1 - - [26/Jan/2022:06:17:44 +0000] \"GET /movie/573a1390f29313caabcd5c0 HTTP/1.1\" 400 25 \"-\" \"PostmanRuntime/7.18.0\"\n"}
+{"level":"info","message":"::1 - - [28/Jan/2022:02:41:46 +0000] \"POST /auth/signup HTTP/1.1\" 400 54 \"-\" \"PostmanRuntime/7.18.0\"\n"}
+{"level":"info","message":"::1 - - [28/Jan/2022:02:49:42 +0000] \"POST /auth/signup HTTP/1.1\" 500 1114 \"-\" \"PostmanRuntime/7.18.0\"\n"}
+{"level":"info","message":"::1 - - [28/Jan/2022:02:50:52 +0000] \"POST /auth/signup HTTP/1.1\" 400 81 \"-\" \"PostmanRuntime/7.18.0\"\n"}
+{"level":"info","message":"::1 - - [28/Jan/2022:02:52:01 +0000] \"POST /auth/signup HTTP/1.1\" 400 81 \"-\" \"PostmanRuntime/7.18.0\"\n"}
+{"level":"info","message":"::1 - - [28/Jan/2022:02:52:14 +0000] \"POST /auth/signup HTTP/1.1\" 400 101 \"-\" \"PostmanRuntime/7.18.0\"\n"}
