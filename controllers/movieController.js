@@ -3,6 +3,7 @@ const { ObjectId } = require('bson');
 const createError = require('http-errors');
 
 const getMovies = (req, res, next) => {
+    console.log('get movies is called');
     const pageNum = parseInt(req.params.page);
     if (isNaN(pageNum)) {
         //return res.status(400).send('bad request');
