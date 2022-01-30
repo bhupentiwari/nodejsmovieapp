@@ -1,3 +1,5 @@
-/node_modules
-/configuration/db.config.js
-/logs
+node_modules/
+configuration/db.config.js
+logs/
+.env
+private.key

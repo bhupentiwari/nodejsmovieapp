@@ -3,7 +3,8 @@ const { MongoClient } = require('mongodb');
 const { UserName,Password,DB}  = require ('./db.config');
 
 //const mongoose = require("mongoose");
-const _uri = `mongodb+srv://${UserName}:${Password}@cluster0.2xpfv.mongodb.net/${DB}?retryWrites=true&w=majority`;
+//const _uri = `mongodb+srv://${UserName}:${Password}@cluster0.2xpfv.mongodb.net/${DB}?retryWrites=true&w=majority`;
+const _uri = process.env.MONGODB_URI
 
 const dbCon = (coll,cb) =>{
     MongoClient.connect(_uri)
