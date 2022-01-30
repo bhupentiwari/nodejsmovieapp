@@ -1,47 +1,48 @@
 const { dbCon } = require('../configuration');
 const createError = require('http-errors');
-const {userValidator} = require('../validator');
-const { message } = require('../validator/userValidator');
+const { userValidator,userLoginValidator } = require('../validator');
+const { hashSync,compareSync}  = require('bcryptjs');
 class User {
 
-    constructor(userData){
-        this.userData = { ...userData};
-        console.log(this.userData);
+    constructor(userData) {
+        this.userData = { ...userData };
     };
-    save(){
-        try {
-            dbCon('users',async (db) =>{
-                console.log('save method is called');
-                await db.insertOne(this.userData); 
-             });
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    checkExistence(){
-        console.log('check existence is called');
-        return new Promise((resolve,reject)=>{
+    save(cb) {
+        dbCon('users', async (db) => {
             try {
-                dbCon('users',async(db)=>{
-                    const user = await db.findOne({'$or':[{username: this.userData['username']},
-                    {email: this.userData['email']}]});
-                    console.log(user);
-
-                    if(!user){
+                const hashedPassword = hashSync(this.userData['password'],12);
+                this.userData['password'] = hashedPassword;
+                //console.log(this.userData);
+                await db.insertOne(this.userData);
+                cb();
+            } catch (error) {
+                cb(error);
+            }
+        });
+    }
+    checkExistence() {
+        return new Promise((resolve, reject) => {
+            try {
+                dbCon('users', async (db) => {
+                    const user = await db.findOne({
+                        '$or': [{ username: this.userData['username'] },
+                        { email: this.userData['email'] }]
+                    });
+                    if (!user) {
                         resolve({
-                            check : false
+                            check: false
                         })
                     }
-                    else if(this.userData['username'] === user.username){
+                    else if (this.userData['username'] === user.username) {
                         resolve({
-                            check : true,
-                            message : 'this username is already in use'
+                            check: true,
+                            message: 'this username is already in use'
                         })
                     }
-                    else if(this.userData['email'] === user.email){
+                    else if (this.userData['email'] === user.email) {
                         resolve({
-                            check : true,
-                            message : 'this email is already in use'
+                            check: true,
+                            message: 'this email is already in use'
                         })
                     }
                 });
@@ -50,27 +51,52 @@ class User {
             }
         })
     }
-    static validate(userData){
+    static validate(userData) {
         const result = userValidator.validate(userData);
         return result;
     };
-};
-const userObject = new User({
-    username: 'bhupentiwari',
-    email : 'bhupentiwari@live.com',
-    password: 'bhupentiwari',
-    first_name : 'Bhupendra',
-    last_name: 'Tiwari'
-});
+    static login(userData){
+        console.log(userData);
+        return new Promise((resolve,reject)=>{
+        //Validation block
+        const validation = userLoginValidator.validate(userData);
+        if(validation.error){
+            const error = new Error(validation.error.message);
+            error.statusCode = 400;
+            return resolve(error);
+        }
 
-userObject.checkExistence()
-    .then(check =>{
-        console.log(check);
-    })
-    .catch(error=>()=>{
-        console.log(console.error)
-    })
-//user.save();
+        dbCon('users',async(db) =>{
+            try {
+            //find user
+            const user = await db.findOne({'$or':[{username : userData['username']},
+            {password: userData['password']}]},{projection:{username: 1,password: 1}});
+            //console.log(user);
+            console.log
+            if(!user || !compareSync(userData['password'],user.password)){
+                const error = new Error('Please enter valid username and password');
+                error.statusCode = 404;
+                return resolve(error);
+            }
+            resolve(user);
+            //const check = compareSync(userData['password'],user.password);
+
+            } catch (err) {
+                reject(err);
+            }
+        })
+        })
+    }
+};
+
+
+// User.login({
+//     username: 'bhup',
+//     password : 'bhsb'
+// })
+// .then(res =>{
+//     console.log(res);
+// });
 
 module.exports = User;
 

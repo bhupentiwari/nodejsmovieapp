@@ -22,11 +22,7 @@ app.use((req, res, next) => {
 })
 
 app.use((error,req,res,next)=>{
-    res.statusCode = error.statusCode;
-    console.log('error');
-    console.log(logger);
-    //logger.error(error.message);
-   
+    //res.statusCode = error.statusCode;
     res.json({
         message: error.message
     });
